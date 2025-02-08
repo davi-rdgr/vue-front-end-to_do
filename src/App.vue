@@ -1,5 +1,24 @@
 <script setup>
-let nome = "Davi";
+import { ref } from 'vue';
+
+//array
+let arrayTask = ref([]);
+let arrayExclude = ref(["ta excluído"]);
+
+const adicionarTaskSubmit = (e) => {
+  e.preventDefault();
+
+  adicionarTask();
+
+}
+// função para adicionar uma task
+const adicionarTask = () => {
+  let task = document.querySelector('.main_input_task');
+
+  arrayTask.value.push(task.value);
+  task.value = "";
+}
+
 </script>
 
 <template>
@@ -18,7 +37,7 @@ let nome = "Davi";
   </header>
   <main>
     <section class="form_sec">
-      <form method="post">
+      <form @submit="adicionarTaskSubmit" method="post">
         <div class="main_form_style">
           <input class="main_input_task" type="text" name="tarefa" placeholder="Qual será sua tarefa ?">
           <input class="main_input_submit" type="submit" value="Adicionar!">
@@ -35,9 +54,9 @@ let nome = "Davi";
               <li>Lembrar de tirar o lixo amanhã</li>
             </ul>
           </article>
-          <article class="todo_article">
+          <article v-for="task in arrayTask" class="todo_article">
             <ul>
-              <li>Prova de física daqui 3 semanas, estudar 2x por dia</li>
+              <li> {{ task }}</li>
             </ul>
           </article>
         </section>
@@ -45,23 +64,18 @@ let nome = "Davi";
     </section>
     <section class="dolist_sec">
       <div class="do_content">
-        <h2>Do list</h2>
+        <h2>Done list</h2>
         <section class="do_lists">
-          <article class="do_article">
-            <ul>
-              <li>Lembrar de tirar o lixo amanhã</li>
-            </ul>
-          </article>
-          <article class="do_article">
-            <ul>
-              <li>Prova de física daqui 3 semanas, estudar 2x por dia</li>
-            </ul>
-          </article>
           <article class="do_article">
             <ul>
               <li>Amanhã preciso passear com o cachorro, mas não posso esquecer que preciso levar uma
                 sacola
                 caso o precioso faça suas necessidades na rua.</li>
+            </ul>
+          </article>
+          <article v-for="exclude in arrayExclude" class="do_article">
+            <ul>
+              <li>{{ exclude }}</li>
             </ul>
           </article>
         </section>
