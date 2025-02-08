@@ -7,6 +7,7 @@
     --verde: #008000;
     --amarelo: #caca04;
     --azul_escuro: #203D4D;
+    --azul: #1B4AC5;
     --preto: #000000;
 }
 
@@ -112,8 +113,8 @@ section {
     width: 100%;
     margin-top: .6rem;
     border: 1px solid var(--cinza);
-    border-right: 3px solid var(--verde);
-    border-top: 2px solid var(--azul_escuro);
+    border-right: 3px solid var(--azul);
+   /*  border-top: 2px solid var(--azul_escuro); */
     border-radius: 5px;
     padding: 5px;
 }
@@ -124,7 +125,7 @@ section {
     margin-top: .6rem;
     border: 1px solid var(--cinza);
     border-right: 3px solid var(--vermelho);
-    border-top: 2px solid var(--azul_escuro);
+    /* border-top: 2px solid var(--azul_escuro); */
     border-radius: 5px;
     padding: 5px;
 }
@@ -156,7 +157,8 @@ section {
     Desktops, large screens – 1025px — 1200px.
     Extra large screens, TV – 1201px, and more.*/
 
-.todo_article, .do_article {
+.todo_article,
+.do_article {
     position: relative;
 }
 
@@ -166,4 +168,8 @@ section {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.teste img {
+    color: red;
 }
