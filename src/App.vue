@@ -1,28 +1,31 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-//array
+//arrays para guardar to-do e done
 let arrayTask = ref([]);
-let arrayExclude = ref(["ta excluído"]);
+let arrayExclude = ref([]);
 
 const adicionarTaskSubmit = (e) => {
   e.preventDefault();
 
   adicionarTask();
-
-}
+};
 // função para adicionar uma task
 const adicionarTask = () => {
-  let task = document.querySelector('.main_input_task');
-
+  // mudar de posição depois:
+  let task = document.querySelector(".main_input_task");
   arrayTask.value.push(task.value);
   task.value = "";
-}
-
+};
+// função para passar a task para done
+const alterarDoneList = (index, task) => {
+  console.log(index);
+  arrayExclude.value.push(task);
+  arrayTask.value.splice(index, 1);
+};
 </script>
 
 <template>
-
   <header>
     <section class="header_sec">
       <div class="burguer_button_content">
@@ -39,8 +42,13 @@ const adicionarTask = () => {
     <section class="form_sec">
       <form @submit="adicionarTaskSubmit" method="post">
         <div class="main_form_style">
-          <input class="main_input_task" type="text" name="tarefa" placeholder="Qual será sua tarefa ?">
-          <input class="main_input_submit" type="submit" value="Adicionar!">
+          <input
+            class="main_input_task"
+            type="text"
+            name="tarefa"
+            placeholder="Qual será sua tarefa ?"
+          />
+          <input class="main_input_submit" type="submit" value="Adicionar!" />
         </div>
       </form>
     </section>
@@ -49,14 +57,12 @@ const adicionarTask = () => {
       <div class="todo_content">
         <h2>To do list</h2>
         <section class="todo_lists">
-          <article class="todo_article">
+          <article v-for="(task, index) in arrayTask" :key="index" class="todo_article">
             <ul>
-              <li>Lembrar de tirar o lixo amanhã</li>
-            </ul>
-          </article>
-          <article v-for="task in arrayTask" class="todo_article">
-            <ul>
-              <li> {{ task }}</li>
+              <li>{{ task }}</li>
+              <div class="teste" @click="alterarDoneList(index, task)">
+                <img src="/icons8-selecionado.svg" alt="" />
+              </div>
             </ul>
           </article>
         </section>
@@ -68,9 +74,11 @@ const adicionarTask = () => {
         <section class="do_lists">
           <article class="do_article">
             <ul>
-              <li>Amanhã preciso passear com o cachorro, mas não posso esquecer que preciso levar uma
-                sacola
-                caso o precioso faça suas necessidades na rua.</li>
+              <li>
+                Amanhã preciso passear com o cachorro, mas não posso esquecer que preciso
+                levar uma sacola caso o precioso faça suas necessidades na rua.
+              </li>
+              <div class="teste"><img src="/icons8-cancelar(1).svg" alt="" /></div>
             </ul>
           </article>
           <article v-for="exclude in arrayExclude" class="do_article">
@@ -81,7 +89,5 @@ const adicionarTask = () => {
         </section>
       </div>
     </section>
-
   </main>
-
 </template>
