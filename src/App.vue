@@ -8,6 +8,12 @@ let arrayExclude = ref([]);
 const adicionarTaskSubmit = (e) => {
   e.preventDefault();
 
+  let task = document.querySelector(".main_input_task");
+  if (task.value === "") {
+    console.log("Valores vazios!");
+    alert("Tente adicionar uma mensagem! ;)");
+    return;
+  }
   adicionarTask();
 };
 // função para adicionar uma task
@@ -19,9 +25,12 @@ const adicionarTask = () => {
 };
 // função para passar a task para done
 const alterarDoneList = (index, task) => {
-  console.log(index);
   arrayExclude.value.push(task);
   arrayTask.value.splice(index, 1);
+};
+
+const alternarExcluirList = (index) => {
+  arrayExclude.value.splice(index, 1);
 };
 </script>
 
@@ -61,7 +70,7 @@ const alterarDoneList = (index, task) => {
             <ul>
               <li>{{ task }}</li>
               <div class="teste" @click="alterarDoneList(index, task)">
-                <img src="/icons8-selecionado.svg" alt="" />
+                <img src="../src/assets/svg/image2.svg" alt="" />
               </div>
             </ul>
           </article>
@@ -72,18 +81,16 @@ const alterarDoneList = (index, task) => {
       <div class="do_content">
         <h2>Done list</h2>
         <section class="do_lists">
-          <article class="do_article">
-            <ul>
-              <li>
-                Amanhã preciso passear com o cachorro, mas não posso esquecer que preciso
-                levar uma sacola caso o precioso faça suas necessidades na rua.
-              </li>
-              <div class="teste"><img src="/icons8-cancelar(1).svg" alt="" /></div>
-            </ul>
-          </article>
-          <article v-for="exclude in arrayExclude" class="do_article">
+          <article
+            v-for="(exclude, index) in arrayExclude"
+            :key="index"
+            class="do_article"
+          >
             <ul>
               <li>{{ exclude }}</li>
+              <div class="teste" @click="alternarExcluirList(index)">
+                <img src="../src/assets/svg/image1.svg" alt="" />
+              </div>
             </ul>
           </article>
         </section>
