@@ -57,7 +57,6 @@ const adicionarTask = () => {
           <article v-for="task in arrayTask" class="todo_article">
             <ul>
               <li> {{ task }}</li>
-              <!-- <li>Prova de física daqui 3 semanas, estudar 2x por dia</li> -->
             </ul>
           </article>
         </section>
