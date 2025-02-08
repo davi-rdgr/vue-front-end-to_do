@@ -1,47 +1,73 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+let nome = "Davi";
 </script>
 
 <template>
+
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <section class="header_sec">
+      <div class="burguer_button_content">
+        <div class="burguer"></div>
+        <div class="burguer"></div>
+        <div class="burguer"></div>
+      </div>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+      <h1>Make your to-do list!</h1>
+      <div class="space_content"></div>
+    </section>
   </header>
-
   <main>
-    <TheWelcome />
+    <section class="form_sec">
+      <form method="post">
+        <div class="main_form_style">
+          <input class="main_input_task" type="text" name="tarefa" placeholder="Qual será sua tarefa ?">
+          <input class="main_input_submit" type="submit" value="Adicionar!">
+        </div>
+      </form>
+    </section>
+
+    <section class="todo_list_sec">
+      <div class="todo_content">
+        <h2>To do list</h2>
+        <section class="todo_lists">
+          <article class="todo_article">
+            <ul>
+              <li>Lembrar de tirar o lixo amanhã</li>
+            </ul>
+          </article>
+          <article class="todo_article">
+            <ul>
+              <li>Prova de física daqui 3 semanas, estudar 2x por dia</li>
+            </ul>
+          </article>
+        </section>
+      </div>
+    </section>
+    <section class="dolist_sec">
+      <div class="do_content">
+        <h2>Do list</h2>
+        <section class="do_lists">
+          <article class="do_article">
+            <ul>
+              <li>Lembrar de tirar o lixo amanhã</li>
+            </ul>
+          </article>
+          <article class="do_article">
+            <ul>
+              <li>Prova de física daqui 3 semanas, estudar 2x por dia</li>
+            </ul>
+          </article>
+          <article class="do_article">
+            <ul>
+              <li>Amanhã preciso passear com o cachorro, mas não posso esquecer que preciso levar uma
+                sacola
+                caso o precioso faça suas necessidades na rua.</li>
+            </ul>
+          </article>
+        </section>
+      </div>
+    </section>
+
   </main>
+
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
