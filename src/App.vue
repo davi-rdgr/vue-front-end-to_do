@@ -54,15 +54,51 @@ const salvarLocalStorage = () => {
   localStorage.setItem("to_do", JSON.stringify(arrayTask.value));
   localStorage.setItem("done", JSON.stringify(arrayExclude.value));
 };
+
+let boolean = null;
+const toggleMenu = () => {
+  let side_menu = document.querySelector(".side_menu");
+  let burguer = document.querySelectorAll(".burguer");
+  let button = document.querySelector(".buttonnone");
+
+  if (boolean === null || boolean !== true) {
+    side_menu.style.transform = "translateX(0%)";
+    button.style.backgroundColor = "rgba(32, 61, 77, 0.925)";
+    burguer.forEach((element) => {
+      element.style.background = "#ffffff";
+    });
+
+    boolean = true;
+  } else if (boolean === true) {
+    side_menu.style.transform = "translateX(-100%)";
+
+    button.style.backgroundColor = "#ffffff";
+    burguer.forEach((element) => {
+      element.style.background = "#203D4D";
+    });
+
+    boolean = false;
+  }
+};
 </script>
 
 <template>
+  <div class="side_menu">
+    <nav>
+    <div class="nav_menu">Dark - Light mode</div>
+    <div class="nav_menu">Ver todas</div>
+    <div class="nav_menu">Apenas to-do</div>
+    <div class="nav_menu">Apenas done</div>
+    </nav>
+  </div>
   <header>
     <section class="header_sec">
       <div class="burguer_button_content">
-        <div class="burguer"></div>
-        <div class="burguer"></div>
-        <div class="burguer"></div>
+        <button class="buttonnone" v-on:click="toggleMenu()">
+          <div class="burguer"></div>
+          <div class="burguer"></div>
+          <div class="burguer"></div>
+        </button>
       </div>
 
       <h1>Make your to-do list!</h1>
