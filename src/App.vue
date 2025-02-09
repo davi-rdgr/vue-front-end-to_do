@@ -55,6 +55,9 @@ const salvarLocalStorage = () => {
   localStorage.setItem("done", JSON.stringify(arrayExclude.value));
 };
 
+// BOTÕES
+
+// melhorar:
 let boolean = null;
 const toggleMenu = () => {
   let side_menu = document.querySelector(".side_menu");
@@ -80,15 +83,43 @@ const toggleMenu = () => {
     boolean = false;
   }
 };
+
+// botoes menu
+
+const toggleCollor = () => {};
+const see_all = () => {
+  let todo_list_sec = document.querySelector(".todo_list_sec");
+  let dolist_sec = document.querySelector(".dolist_sec");
+  dolist_sec.style.display = "block";
+  todo_list_sec.style.display = "block";
+};
+const only_todo = () => {
+  let todo_list_sec = document.querySelector(".todo_list_sec");
+  let dolist_sec = document.querySelector(".dolist_sec");
+  dolist_sec.style.display = "none";
+  todo_list_sec.style.display = "block";
+};
+const only_done = () => {
+  let todo_list_sec = document.querySelector(".todo_list_sec");
+  let dolist_sec = document.querySelector(".dolist_sec");
+  dolist_sec.style.display = "block";
+  todo_list_sec.style.display = "none";
+};
 </script>
 
 <template>
   <div class="side_menu">
     <nav>
-    <div class="nav_menu">Dark - Light mode</div>
-    <div class="nav_menu">Ver todas</div>
-    <div class="nav_menu">Apenas to-do</div>
-    <div class="nav_menu">Apenas done</div>
+      <button class="nav_menu nav_menu_color_mode" v-on:click="toggleColor()">
+        Dark - Light mode
+      </button>
+      <button class="nav_menu nav_menu_see_all" v-on:click="see_all()">Ver todas</button>
+      <button class="nav_menu nav_menu_only_todo" v-on:click="only_todo()">
+        Apenas to-do
+      </button>
+      <button class="nav_menu nav_menu_only_done" v-on:click="only_done()">
+        Apenas done
+      </button>
     </nav>
   </div>
   <header>
