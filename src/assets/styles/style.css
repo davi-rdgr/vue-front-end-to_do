@@ -92,6 +92,7 @@ section {
     background-color: var(--branco);
     color: #203D4D;
     font-weight: 500;
+    cursor: pointer;
 }
 
 /* Área to-do */
@@ -126,7 +127,6 @@ section {
     margin-top: .6rem;
     border: 1px solid var(--cinza);
     border-right: 3px solid var(--vermelho);
-    /* border-top: 2px solid var(--azul_escuro); */
     border-radius: 5px;
     padding: 5px;
     position: relative;
@@ -159,7 +159,6 @@ section {
 
 }
 
-
 /* 
     Mobile devices – 320px — 480px.
     iPads, Tablets – 481px — 768px.
@@ -167,3 +166,41 @@ section {
     Desktops, large screens – 1025px — 1200px.
     Extra large screens, TV – 1201px, and more.
 */
+
+template {
+    position: relative;
+}
+
+.side_menu {
+    height: 100vh;
+    width: 50%;
+    background-color: rgba(32, 61, 77, 0.925);
+    position: absolute;
+    transform: translateX(-100%);
+    z-index: 2;
+}
+
+.side_menu nav {
+    margin-top: 50px;
+}
+
+
+/* arrumar */
+.buttonnone {
+    border: none;
+    color: none;
+    background-color: #ffffff;
+    z-index: 2;
+}
+
+.buttonnone:hover {
+    background-color: none;
+}
+
+.nav_menu {
+    height: 40px;
+    width: 100%;
+    border-top: 1px solid var(--azul_escuro);
+    color: #ffffff;
+    padding: 6px;
+}
