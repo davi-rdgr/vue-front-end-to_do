@@ -1,13 +1,21 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+
+// recupera os dados salvos no local storage e adiciona nos array to_do e done
+onMounted(() => {
+  arrayTask.value = JSON.parse(localStorage.getItem("to_do")) || [];
+  arrayExclude.value = JSON.parse(localStorage.getItem("done")) || [];
+});
 
 //arrays para guardar to-do e done
 let arrayTask = ref([]);
 let arrayExclude = ref([]);
 
+/* input submit que quando clicado, lê o conteúdo do input 'main_input_task', faz um tratamento de dados e, se verdadeiro, executa a função adicionarTask(); */
 const adicionarTaskSubmit = (e) => {
   e.preventDefault();
 
+  /* tratamento de dados para que não possa ser criado cards vazios */
   let task = document.querySelector(".main_input_task");
   if (task.value === "") {
     console.log("Valores vazios!");
@@ -16,21 +24,35 @@ const adicionarTaskSubmit = (e) => {
   }
   adicionarTask();
 };
-// função para adicionar uma task
+
+/* cria e adiciona uma nova task no array to-do e chama a função para atualizar o local storage */
 const adicionarTask = () => {
   // mudar de posição depois:
   let task = document.querySelector(".main_input_task");
   arrayTask.value.push(task.value);
   task.value = "";
+
+  salvarLocalStorage();
 };
-// função para passar a task para done
+
+/* altera o array da task de to-do para done e chama a função para atualizar o local storage */
 const alterarDoneList = (index, task) => {
   arrayExclude.value.push(task);
   arrayTask.value.splice(index, 1);
+
+  salvarLocalStorage();
 };
 
+/* exclui permanentemente a task do array to-do selecionando por índice e chama a função para atualizar o local storage */
 const alternarExcluirList = (index) => {
   arrayExclude.value.splice(index, 1);
+
+  salvarLocalStorage();
+};
+// função que atualiza o local storage baseado nos array to-do e done sempre que chamada.
+const salvarLocalStorage = () => {
+  localStorage.setItem("to_do", JSON.stringify(arrayTask.value));
+  localStorage.setItem("done", JSON.stringify(arrayExclude.value));
 };
 </script>
 
@@ -69,7 +91,7 @@ const alternarExcluirList = (index) => {
           <article v-for="(task, index) in arrayTask" :key="index" class="todo_article">
             <ul>
               <li>{{ task }}</li>
-              <div class="teste" @click="alterarDoneList(index, task)">
+              <div class="task_list_check" @click="alterarDoneList(index, task)">
                 <img src="../src/assets/svg/image2.svg" alt="" />
               </div>
             </ul>
@@ -88,7 +110,7 @@ const alternarExcluirList = (index) => {
           >
             <ul>
               <li>{{ exclude }}</li>
-              <div class="teste" @click="alternarExcluirList(index)">
+              <div class="task_list_check" @click="alternarExcluirList(index)">
                 <img src="../src/assets/svg/image1.svg" alt="" />
               </div>
             </ul>
