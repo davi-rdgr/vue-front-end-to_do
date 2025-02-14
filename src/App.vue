@@ -1,6 +1,12 @@
 <script setup>
 import { onMounted, ref } from "vue";
 
+
+import { variavel } from "../src/Buttons.vue"
+
+console.log(variavel);
+
+
 // recupera os dados salvos no local storage e adiciona nos array to_do e done
 onMounted(() => {
   arrayTask.value = JSON.parse(localStorage.getItem("to_do")) || [];
@@ -85,25 +91,28 @@ const toggleMenu = () => {
 };
 
 // botoes menu
+let side_menu = document.querySelector(".side_menu");
+let verDo = ref(true);
+let verDone = ref(true);
 
-const toggleCollor = () => {};
+const toggleCollor = () => { };
 const see_all = () => {
-  let todo_list_sec = document.querySelector(".todo_list_sec");
-  let dolist_sec = document.querySelector(".dolist_sec");
-  dolist_sec.style.display = "block";
-  todo_list_sec.style.display = "block";
+  verDo.value = true;
+  verDone.value = true;
+  // amanhã dar um visu aqui
+  let side_menu = document.querySelector(".side_menu");
+  side_menu.style.transform = "translateX(-100%)";
 };
 const only_todo = () => {
-  let todo_list_sec = document.querySelector(".todo_list_sec");
-  let dolist_sec = document.querySelector(".dolist_sec");
-  dolist_sec.style.display = "none";
-  todo_list_sec.style.display = "block";
+  verDo.value = true;
+  verDone.value = false;
+
 };
 const only_done = () => {
-  let todo_list_sec = document.querySelector(".todo_list_sec");
-  let dolist_sec = document.querySelector(".dolist_sec");
-  dolist_sec.style.display = "block";
-  todo_list_sec.style.display = "none";
+  verDo.value = false;
+  verDone.value = true;
+
+
 };
 </script>
 
@@ -140,18 +149,13 @@ const only_done = () => {
     <section class="form_sec">
       <form @submit="adicionarTaskSubmit" method="post">
         <div class="main_form_style">
-          <input
-            class="main_input_task"
-            type="text"
-            name="tarefa"
-            placeholder="Qual será sua tarefa ?"
-          />
+          <input class="main_input_task" type="text" name="tarefa" placeholder="Qual será sua tarefa ?" />
           <input class="main_input_submit" type="submit" value="Adicionar!" />
         </div>
       </form>
     </section>
 
-    <section class="todo_list_sec">
+    <section v-if="verDo === true" class="todo_list_sec">
       <div class="todo_content">
         <h2>To do list</h2>
         <section class="todo_lists">
@@ -166,15 +170,11 @@ const only_done = () => {
         </section>
       </div>
     </section>
-    <section class="dolist_sec">
+    <section v-if="verDone === true" class="dolist_sec">
       <div class="do_content">
         <h2>Done list</h2>
         <section class="do_lists">
-          <article
-            v-for="(exclude, index) in arrayExclude"
-            :key="index"
-            class="do_article"
-          >
+          <article v-for="(exclude, index) in arrayExclude" :key="index" class="do_article">
             <ul>
               <li>{{ exclude }}</li>
               <div class="task_list_check" @click="alternarExcluirList(index)">
