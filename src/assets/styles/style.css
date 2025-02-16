@@ -35,10 +35,6 @@ section {
     margin-bottom: 1rem;
 }
 
-.container_main {
-    height: 100vh;
-}
-
 /* Header: */
 
 .header_sec {
@@ -120,14 +116,6 @@ section {
 
 }
 
-/* 
-    Mobile devices – 320px — 480px.
-    iPads, Tablets – 481px — 768px.
-    Small screens, laptops – 769px — 1024px.
-    Desktops, large screens – 1025px — 1200px.
-    Extra large screens, TV – 1201px, and more.
-*/
-
 template {
     position: relative;
 }
@@ -135,7 +123,6 @@ template {
 .side_menu {
     height: 100vh;
     width: 50%;
-    /* background-color: rgba(32, 61, 77, 0.945); */
     background-color: #0e1c24e7;
     position: absolute;
     transform: translateX(-100%);
@@ -150,24 +137,42 @@ template {
 .nav_menu {
     height: 40px;
     width: 100%;
-    /*  border-top: 1px solid var(--azul_escuro); */
     color: #ffffff;
     border: none;
     background-color: rgba(32, 61, 77, 0);
 }
 
+.header_menu_desk {
+    display: none;
+}
+
+
+
 
 /* dark mode  */
 /* containers; */
 
+/* main */
+.dark_mode {
+    background-color: var(--azul_escuro_2);
+    transition: all .3s ease;
+}
+
+.white_mode {
+    background-color: var(--branco);
+    transition: all .3s ease;
+}
+
 .dark_mode_container {
     background-color: var(--azul_escuro_2);
     transition: all .3s ease;
+    height: 100vh;
 }
 
 .white_mode_container {
     background-color: var(--branco);
     transition: all .3s ease;
+    height: 100vh;
 }
 
 /* títulos: */
@@ -182,10 +187,6 @@ template {
     font-size: 1.1rem;
     color: #203D4D;
     transition: all .3s ease;
-}
-
-.header_menu_desk {
-    display: none;
 }
 
 /* titulos 2: */
@@ -238,14 +239,6 @@ template {
     transition: all .3s ease;
 }
 
-/* .white_mode_burguer_lateral {
-    background-color: var(--branco);
-    height: 3px;
-    width: 25px;
-    margin: 4px;
-    z-index: 2;
-    transition: all .3s ease;
-} */
 
 .dark_mode_button {
     background-color: var(--azul_escuro_2);
