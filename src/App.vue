@@ -3,15 +3,6 @@ import { onMounted, ref } from "vue";
 import { variavel } from "../src/Buttons.vue"
 /* console.log(variavel); */
 
-let data = new Date();
-let dia = data.getDate();
-let meses = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-let mes = meses[data.getMonth()];
-let ano = data.getFullYear();
-let horas = data.getHours();
-let minutos = data.getMinutes();
-let hora_concatenada = `${horas}:${minutos} - ${dia}/${mes}/${ano}`;
-
 //objeto para guardar to-do e done
 let objTodo = ref([]);
 let objDone = ref([]);
@@ -21,6 +12,17 @@ onMounted(() => {
   objTodo.value = JSON.parse(localStorage.getItem("objTodo")) || [];
   objDone.value = JSON.parse(localStorage.getItem("objDone")) || [];
 });
+
+const pegarData = () => {
+  let data = new Date();
+  let dia = data.getDate();
+  let meses = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+  let mes = meses[data.getMonth()];
+  let ano = data.getFullYear();
+  let horas = data.getHours();
+  let minutos = data.getMinutes();
+  return `${horas}:${minutos} - ${dia}/${mes}/${ano}`;
+}
 
 
 /* input submit que quando clicado, lê o conteúdo do input 'main_input_task', faz um tratamento de dados e, se verdadeiro, executa a função adicionarTask(); */
@@ -34,6 +36,8 @@ const adicionarTaskSubmit = (e) => {
     alert("Tente preencher os campos para sua nota! :))");
     return;
   }
+  let hora_concatenada = pegarData();
+
 
   /* cria e adiciona uma nova task no array to-do e chama a função para atualizar o local storage */
   objTodo.value.push({
