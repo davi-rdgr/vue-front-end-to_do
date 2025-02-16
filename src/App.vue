@@ -123,7 +123,7 @@ if (mudarCor && boolean) {
 </script>
 
 <template>
-  <div class="container_main" :class="mudarCor ? 'dark_mode_container' : 'white_mode_container'">
+  <div :class="mudarCor ? 'dark_mode_container' : 'white_mode_container'">
     <div class="side_menu">
       <nav>
         <button class="nav_menu nav_menu_color_mode" v-on:click="toggleColor()">
@@ -191,7 +191,7 @@ if (mudarCor && boolean) {
           </section>
         </div>
       </section>
-      <section v-if="verDone === true" class="dolist_sec">
+      <section :class="mudarCor ? 'dark_mode' : 'white_mode'" v-if="verDone === true" class="dolist_sec">
         <div class="done_content">
           <h2 :class="mudarCor ? 'dark_mode_h2' : 'white_mode_h2'">Done list</h2>
           <section class="done_lists">
