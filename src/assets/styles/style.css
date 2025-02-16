@@ -321,6 +321,19 @@ template {
     outline: none;
 }
 
+.main_input_tittle {
+    font-size: .8rem;
+}
+
+.main_input_task {
+    font-size: .8rem;
+    resize: none;
+}
+
+.main_input_task:focus {
+    height: 4.5rem;
+}
+
 .white_mode_input_submit {
     height: 40px;
     width: 50%;
