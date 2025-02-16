@@ -149,6 +149,18 @@ if (mudarCor && boolean) {
         </div>
 
         <h1 :class="mudarCor ? 'dark_mode_h1' : 'white_mode_h1'">Make your to-do list!</h1>
+        <nav class="header_menu_desk">
+          <ul>
+            <li><button :class="mudarCor ? 'nav_menu_desk_dark' : 'nav_menu_desk_white'" v-on:click="see_all()">See
+                all</button></li>
+            <li><button :class="mudarCor ? 'nav_menu_desk_dark' : 'nav_menu_desk_white'" v-on:click="only_todo()">See to
+                do</button></li>
+            <li><button :class="mudarCor ? 'nav_menu_desk_dark' : 'nav_menu_desk_white'" v-on:click="only_done()">See
+                done</button></li>
+            <li><button :class="mudarCor ? 'nav_menu_desk_dark' : 'nav_menu_desk_white'" v-on:click="toggleColor()">Dark
+                mode</button></li>
+          </ul>
+        </nav>
         <div class="space_content"></div>
       </section>
     </header>
@@ -172,7 +184,7 @@ if (mudarCor && boolean) {
               <ul>
                 <li :class="mudarCor ? 'dark_mode_p' : 'white_mode_p'">{{ task }}</li>
                 <div class="task_list_check" @click="alterarDoneList(index, task)">
-                  <img src="../src/assets/svg/image2.svg" alt="" />
+                  <img src="../src/assets/svg/darkmode_image2.svg" alt="" />
                 </div>
               </ul>
             </article>
@@ -180,14 +192,14 @@ if (mudarCor && boolean) {
         </div>
       </section>
       <section v-if="verDone === true" class="dolist_sec">
-        <div class="do_content">
+        <div class="done_content">
           <h2 :class="mudarCor ? 'dark_mode_h2' : 'white_mode_h2'">Done list</h2>
-          <section class="do_lists">
-            <article v-for="(exclude, index) in arrayExclude" :key="index" class="do_article">
+          <section class="done_lists">
+            <article v-for="(exclude, index) in arrayExclude" :key="index" class="done_article">
               <ul>
                 <li :class="mudarCor ? 'dark_mode_p' : 'white_mode_p'">{{ exclude }}</li>
                 <div class="task_list_check" @click="alternarExcluirList(index)">
-                  <img src="../src/assets/svg/image1.svg" alt="" />
+                  <img src="../src/assets/svg/darkmode_image1.svg" alt="" />
                 </div>
               </ul>
             </article>
