@@ -1,63 +1,71 @@
 <script setup>
 import { onMounted, ref } from "vue";
-
-
 import { variavel } from "../src/Buttons.vue"
 /* console.log(variavel); */
 
+let data = new Date();
+let dia = data.getDate();
+let meses = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+let mes = meses[data.getMonth()];
+let ano = data.getFullYear();
+let horas = data.getHours();
+let minutos = data.getMinutes();
+let hora_concatenada = `${horas}:${minutos} - ${dia}/${mes}/${ano}`;
+
+//objeto para guardar to-do e done
+let objTodo = ref([]);
+let objDone = ref([]);
 
 // recupera os dados salvos no local storage e adiciona nos array to_do e done
 onMounted(() => {
-  arrayTask.value = JSON.parse(localStorage.getItem("to_do")) || [];
-  arrayExclude.value = JSON.parse(localStorage.getItem("done")) || [];
+  objTodo.value = JSON.parse(localStorage.getItem("objTodo")) || [];
+  objDone.value = JSON.parse(localStorage.getItem("objDone")) || [];
 });
 
-//arrays para guardar to-do e done
-let arrayTask = ref([]);
-let arrayExclude = ref([]);
+
 
 /* input submit que quando clicado, lê o conteúdo do input 'main_input_task', faz um tratamento de dados e, se verdadeiro, executa a função adicionarTask(); */
 const adicionarTaskSubmit = (e) => {
   e.preventDefault();
 
   /* tratamento de dados para que não possa ser criado cards vazios */
+  let tittle = document.querySelector(".main_input_tittle");
   let task = document.querySelector(".main_input_task");
-  if (task.value === "") {
-    console.log("Valores vazios!");
-    alert("Tente adicionar uma mensagem! ;)");
+  if (task.value === "" || tittle.value === "") {
+    alert("Tente preencher os campos para sua nota! :))");
     return;
   }
-  adicionarTask();
-};
 
-/* cria e adiciona uma nova task no array to-do e chama a função para atualizar o local storage */
-const adicionarTask = () => {
-  // mudar de posição depois:
-  let task = document.querySelector(".main_input_task");
-  arrayTask.value.push(task.value);
+  /* cria e adiciona uma nova task no array to-do e chama a função para atualizar o local storage */
+  objTodo.value.push({
+    titulo: tittle.value,
+    mensagem: task.value,
+    horario: hora_concatenada,
+  })
+  tittle.value = "";
   task.value = "";
-
   salvarLocalStorage();
 };
 
 /* altera o array da task de to-do para done e chama a função para atualizar o local storage */
-const alterarDoneList = (index, task) => {
-  arrayExclude.value.push(task);
-  arrayTask.value.splice(index, 1);
+const alterarDoneList = (index) => {
+  objDone.value.push(objTodo.value[index]);
+  objTodo.value.splice(index, 1);
 
   salvarLocalStorage();
 };
 
 /* exclui permanentemente a task do array to-do selecionando por índice e chama a função para atualizar o local storage */
 const alternarExcluirList = (index) => {
-  arrayExclude.value.splice(index, 1);
+  objDone.value.splice(index, 1);
 
   salvarLocalStorage();
 };
 // função que atualiza o local storage baseado nos array to-do e done sempre que chamada.
 const salvarLocalStorage = () => {
-  localStorage.setItem("to_do", JSON.stringify(arrayTask.value));
-  localStorage.setItem("done", JSON.stringify(arrayExclude.value));
+
+  localStorage.setItem("objTodo", JSON.stringify(objTodo.value));
+  localStorage.setItem("objDone", JSON.stringify(objDone.value));
 };
 
 // BOTÕES
@@ -168,6 +176,8 @@ if (mudarCor && boolean) {
       <section class="form_sec">
         <form @submit="adicionarTaskSubmit" method="post">
           <div class="main_form_style">
+            <input class="main_input_tittle" :class="mudarCor ? 'dark_mode_input_search' : 'white_mode_input_search'"
+              type="text" name="titulo" placeholder="Qual será o título ?" />
             <input class="main_input_task" :class="mudarCor ? 'dark_mode_input_search' : 'white_mode_input_search'"
               type="text" name="tarefa" placeholder="Qual será sua tarefa ?" />
             <input class="main_input_submit" :class="mudarCor ? 'dark_mode_input_submit' : 'white_mode_input_submit'"
@@ -180,9 +190,11 @@ if (mudarCor && boolean) {
         <div class="todo_content">
           <h2 :class="mudarCor ? 'dark_mode_h2' : 'white_mode_h2'">To do list</h2>
           <section class="todo_lists">
-            <article v-for="(task, index) in arrayTask" :key="index" class="todo_article">
+            <article v-for="(task, index) in objTodo" :key="index" class="todo_article">
               <ul>
-                <li :class="mudarCor ? 'dark_mode_p' : 'white_mode_p'">{{ task }}</li>
+                <li :class="mudarCor ? 'dark_mode_p' : 'white_mode_p'">{{ task.titulo }}</li>
+                <li :class="mudarCor ? 'dark_mode_p' : 'white_mode_p'">{{ task.mensagem }}</li>
+                <li :class="mudarCor ? 'dark_mode_p' : 'white_mode_p'">{{ task.horario }}</li>
                 <div class="task_list_check" @click="alterarDoneList(index, task)">
                   <img src="../src/assets/svg/darkmode_image2.svg" alt="" />
                 </div>
@@ -195,9 +207,11 @@ if (mudarCor && boolean) {
         <div class="done_content">
           <h2 :class="mudarCor ? 'dark_mode_h2' : 'white_mode_h2'">Done list</h2>
           <section class="done_lists">
-            <article v-for="(exclude, index) in arrayExclude" :key="index" class="done_article">
+            <article v-for="(exclude, index) in objDone" :key="index" class="done_article">
               <ul>
-                <li :class="mudarCor ? 'dark_mode_p' : 'white_mode_p'">{{ exclude }}</li>
+                <li :class="mudarCor ? 'dark_mode_p' : 'white_mode_p'">{{ exclude.titulo }}</li>
+                <li :class="mudarCor ? 'dark_mode_p' : 'white_mode_p'">{{ exclude.mensagem }}</li>
+                <li :class="mudarCor ? 'dark_mode_p' : 'white_mode_p'">{{ exclude.horario }}</li>
                 <div class="task_list_check" @click="alternarExcluirList(index)">
                   <img src="../src/assets/svg/darkmode_image1.svg" alt="" />
                 </div>

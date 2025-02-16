@@ -62,8 +62,17 @@ section {
 
 /* Main */
 /* Área de adicionar */
-.main_form_style {
+form {
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_form_style {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -221,6 +230,24 @@ template {
     transition: all .3s ease;
 }
 
+.dark_mode_p:nth-child(3),
+.white_mode_p:nth-child(3) {
+    padding-bottom: 0px;
+}
+
+.todo_lists article ul li:nth-child(1),
+.done_lists article ul li:nth-child(1) {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.todo_lists article ul li:nth-child(3),
+.done_lists article ul li:nth-child(3) {
+    font-size: .6rem;
+    font-weight: bold;
+}
+
+
 /* botões */
 
 .dark_mode_burguer {
@@ -263,13 +290,14 @@ template {
 
 /* area de pesquisa: */
 
+
+
 .dark_mode_input_search {
     height: 40px;
-    border: 1px solid var(--cinza);
+    border: none;
     border-radius: 10px;
     padding: 5px;
     margin-right: 5px;
-    width: 55%;
     background-color: var(--azul_escuro_2);
     color: var(--branco);
     transition: all .3s ease;
@@ -277,17 +305,21 @@ template {
 
 .white_mode_input_search {
     height: 40px;
-    border: 1px solid var(--cinza);
+    border: none;
     border-radius: 10px;
     padding: 5px;
     margin-right: 5px;
-    width: 55%;
     transition: all .3s ease;
+}
+
+.white_mode_input_search:focus,
+.dark_mode_input_search:focus {
+    outline: none;
 }
 
 .white_mode_input_submit {
     height: 40px;
-    width: 25%;
+    width: 50%;
     border-radius: 10px;
     border: 1px solid var(--cinza);
     background-color: var(--branco);
@@ -299,7 +331,7 @@ template {
 
 .dark_mode_input_submit {
     height: 40px;
-    width: 25%;
+    width: 50%;
     border-radius: 10px;
     border: 1px solid var(--cinza);
     background-color: var(--azul_escuro_2);
