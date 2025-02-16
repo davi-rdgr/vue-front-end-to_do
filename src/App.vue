@@ -124,14 +124,6 @@ const only_done = () => {
   boolean = false;
 };
 
-
-/* let boolean_menu = true;
-if (mudarCor && boolean) {
-  boolean_menu = false;
-} else {
-  boolean_menu = true;
-} */
-
 </script>
 
 <template>
@@ -181,16 +173,14 @@ if (mudarCor && boolean) {
         <form @submit="adicionarTaskSubmit" method="post">
           <div class="main_form_style">
             <input class="main_input_tittle" :class="mudarCor ? 'dark_mode_input_search' : 'white_mode_input_search'"
-              type="text" name="titulo" placeholder="Qual será o título ?" />
-            <input class="main_input_task" :class="mudarCor ? 'dark_mode_input_search' : 'white_mode_input_search'"
-              type="text" name="tarefa" placeholder="Qual será sua tarefa ?" />
+              type="text" name="titulo" placeholder="Título" />
+            <textarea class="main_input_task" :class="mudarCor ? 'dark_mode_input_search' : 'white_mode_input_search'"
+              type="text" name="tarefa" placeholder="Mensagem" />
             <input class="main_input_submit" :class="mudarCor ? 'dark_mode_input_submit' : 'white_mode_input_submit'"
               type="submit" value="Adicionar!" />
           </div>
         </form>
       </section>
-
-      <!-- ajeitar o input de mensagem para ser flexível para baixo -->
 
       <section v-if="verDo === true" class="todo_list_sec">
         <div class="todo_content">
