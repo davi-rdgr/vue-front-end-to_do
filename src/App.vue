@@ -23,7 +23,6 @@ onMounted(() => {
 });
 
 
-
 /* input submit que quando clicado, lê o conteúdo do input 'main_input_task', faz um tratamento de dados e, se verdadeiro, executa a função adicionarTask(); */
 const adicionarTaskSubmit = (e) => {
   e.preventDefault();
@@ -100,6 +99,7 @@ const toggleColor = () => {
 };
 const see_all = () => {
   verDo.value = true;
+
   verDone.value = true;
   let side_menu = document.querySelector(".side_menu");
   side_menu.style.transform = "translateX(-100%)";
@@ -121,12 +121,12 @@ const only_done = () => {
 };
 
 
-let boolean_menu = true;
+/* let boolean_menu = true;
 if (mudarCor && boolean) {
   boolean_menu = false;
 } else {
   boolean_menu = true;
-}
+} */
 
 </script>
 
@@ -185,6 +185,8 @@ if (mudarCor && boolean) {
           </div>
         </form>
       </section>
+
+      <!-- ajeitar o input de mensagem para ser flexível para baixo -->
 
       <section v-if="verDo === true" class="todo_list_sec">
         <div class="todo_content">
