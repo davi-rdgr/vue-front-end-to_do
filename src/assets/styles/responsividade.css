@@ -36,7 +36,8 @@
         height: 100vh;
     }
 
-    .main_form_style {
+    .main_form_style_white,
+    .main_form_style_dark {
         width: 70%;
     }
 
@@ -110,7 +111,8 @@
         height: 100vh;
     }
 
-    .main_form_style {
+    .main_form_style_white,
+    .main_form_style_dark {
         width: 70%;
     }
 
@@ -188,7 +190,8 @@
         height: 100vh;
     }
 
-    .main_form_style {
+    .main_form_style_white,
+    .main_form_style_dark {
         width: 45%;
     }
 
