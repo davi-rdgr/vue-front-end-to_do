@@ -171,7 +171,7 @@ const only_done = () => {
     <main>
       <section class="form_sec">
         <form @submit="adicionarTaskSubmit" method="post">
-          <div class="main_form_style">
+          <div :class="mudarCor ? 'main_form_style_dark' : 'main_form_style_white'">
             <input class="main_input_tittle" :class="mudarCor ? 'dark_mode_input_search' : 'white_mode_input_search'"
               type="text" name="titulo" placeholder="Título" />
             <textarea class="main_input_task" :class="mudarCor ? 'dark_mode_input_search' : 'white_mode_input_search'"
